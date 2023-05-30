@@ -9,6 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
     "expo": "~48.0.15",
     "expo-asset": "^8.9.1",
     "expo-cli": "^6.3.7",
@@ -19,7 +21,10 @@
     "react-devtools-core": "^4.27.8",
     "react-native": "0.71.8",
     "react-native-cli": "^2.0.1",
-    "react-native-debugger": "^1.1.0"
+    "react-native-debugger": "^1.1.0",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1",
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

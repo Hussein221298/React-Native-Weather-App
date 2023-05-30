@@ -46,14 +46,16 @@ const forecastItem = ({ item }) => (
 
 export default function HourlyForecastList() {
   return (
-    <FlatList
-      data={HOURLY_FORECAST_LIST}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      keyExtractor={(item) => item.id}
-      renderItem={forecastItem}
-    />
-
+    <View style={styles.bigContainer}>
+      <FlatList
+        style={styles.container}
+        data={HOURLY_FORECAST_LIST}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
+        renderItem={forecastItem}
+      />
+    </View>
   );
 }
 
@@ -61,6 +63,9 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
+  },
+  bigContainer: {
+    maxHeight: 120,
   },
  });
  
