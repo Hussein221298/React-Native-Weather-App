@@ -1,12 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./weather"
-import logger from "redux-logger";
+import dailyReducer from "./daily-weather"
+import hourlyReducer from "./hourly-weather"
 import error from "./middleware/error"
-import serializeWeather from "./middleware/serialize-weather"
 import api from "./middleware/api"
+import logger from "redux-logger";
 
 const store = configureStore({ 
-    reducer,
+    reducer: {
+        dailyData: dailyReducer,
+        hourlyData: hourlyReducer
+    },
     middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), api, error]
 });
 
