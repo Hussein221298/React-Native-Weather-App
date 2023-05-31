@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import wmoMap from '../utils/wmo-codes-to-description'
-const { height } = Dimensions.get('window');
 
 export default function weatherDisplay(props) {
   return (
@@ -12,12 +11,17 @@ export default function weatherDisplay(props) {
         <Text style={styles.temperatureValue}>{props.currentTemperature}</Text>
         <Text style={styles.temperatureUnit}>{props.temperatureUnit}</Text>
       </View>
-      <Text style={styles.temperatureRange}>
-        {props.weather?.minTemp}/{props.weather?.maxTemp}{props.temperatureUnit}
-      </Text>   
+
       <Text style={styles.weatherCode}>
         {wmoMap(props.weather?.weatherCode)}
       </Text>
+
+      <View style={styles.temperatureRange}>
+        <Text style={styles.temperatureRangeValue}>
+          {props.weather?.minTemp} - {props.weather?.maxTemp} 
+        </Text>
+        <Text style={styles.temperatureRangeUnit}>{props.temperatureUnit}</Text>
+      </View>
     </View>
   );
 }
@@ -27,9 +31,10 @@ const styles = StyleSheet.create({
   currentTemperatureContainer: { display: 'flex', flexDirection: 'row', alignItems: 'flex-start' },
   temperatureValue: { fontSize: 100, color: '#FFF' },
   temperatureUnit: { marginTop: 20, fontSize: 30, color: '#FFF' },
+  temperatureRange: { display: 'flex', flexDirection: 'row', alignItems: 'flex-start' },
+  temperatureRangeValue: { fontSize: 20, color: '#FFF' },
+  temperatureRangeUnit: { marginTop: 4, fontSize: 10, color: '#FFF' },
   title: { fontSize: 30, color: '#FFF' },
-  date: { fontSize: 20, color: '#FFF' },
-  temperatureRange: { fontSize: 40, color: '#FFF' },
-  weatherCode: { fontSize: 30, color: '#FFF', fontWeight: 500, marginBottom: 10 }
+  weatherCode: { fontSize: 30, color: '#FFF', fontWeight: 500 }
 });
  
