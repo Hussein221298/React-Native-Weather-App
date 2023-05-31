@@ -4,7 +4,7 @@ const api = ({ dispatch }) => next => async action => {
   if (action.type !== "apiRequest") {
     return next(action);
   }
-  const {url, method, data, onStart, onSerialize, onSuccess, onError } = action.payload;
+  const {url, method, data, onStart, onSuccess, onError } = action.payload;
 
   if (onStart) {
     dispatch({ type: onStart });

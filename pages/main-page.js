@@ -16,7 +16,6 @@ export default function MainPage() {
         url: "https://api.open-meteo.com/v1/forecast?latitude=33.89&longitude=35.50&past_days=2&timezone=EET&hourly=temperature_2m,weathercode,is_day&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min",
         method: "GET",
         onStart: apiRequested().type,
-        onSerialize: serializeWeather().type,
         onSuccess: getWeather().type,
         onError: apiRequestFailed().type
       }
