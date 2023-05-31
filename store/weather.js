@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
+import serializeData from './../adapters/serialize-data';
  
-
 const weatherSlice = createSlice({
     name: "weather",
     initialState: {
       loading: false,
       weather: {},
+      error: false,
     },
     reducers: {
       apiRequested: (state) => {
@@ -13,10 +14,11 @@ const weatherSlice = createSlice({
       },
       apiRequestFailed: (state) => {
         state.loading = false;
+        state.error = true;
       },
       getWeather: (state, action) => {
-        state.loading = false;
         state.weather = { ...action.payload };
+        state.loading = false;
       }
     }
 });

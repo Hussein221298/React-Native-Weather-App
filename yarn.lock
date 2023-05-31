@@ -6668,6 +6668,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-linear-gradient@npm:~12.1.2":
+  version: 12.1.2
+  resolution: "expo-linear-gradient@npm:12.1.2"
+  peerDependencies:
+    expo: "*"
+  checksum: 02a8bdd8f27d5f1d41d2ecb4bed60e44e85b3ba22ae9ac70fcadc86d1d8982415adb3ee4568067a3c0a054f86d3f66b5354240cdccbe500f15af6037fc34156e
+  languageName: node
+  linkType: hard
+
 "expo-manifests@npm:~0.5.0":
   version: 0.5.2
   resolution: "expo-manifests@npm:0.5.2"
@@ -12156,6 +12165,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-linear-gradient@npm:^2.6.2":
+  version: 2.6.2
+  resolution: "react-native-linear-gradient@npm:2.6.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: dd0e27d3ddffa239d46919fd397f1ad68cdb6bcaa48c11ec9b01a0f54f0ad383f203a2245f2f06206e63aa4443fe7b2b1cc105ee262bf9a84ee62dabad6028ad
+  languageName: node
+  linkType: hard
+
 "react-native@npm:0.71.8":
   version: 0.71.8
   resolution: "react-native@npm:0.71.8"
@@ -14649,6 +14668,7 @@ __metadata:
     expo-asset: ^8.9.1
     expo-cli: ^6.3.7
     expo-dev-client: ~2.2.1
+    expo-linear-gradient: ~12.1.2
     expo-status-bar: ~1.4.4
     react: 18.2.0
     react-devtools: ^4.27.8
@@ -14656,6 +14676,7 @@ __metadata:
     react-native: 0.71.8
     react-native-cli: ^2.0.1
     react-native-debugger: ^1.1.0
+    react-native-linear-gradient: ^2.6.2
     react-redux: ^8.0.5
     redux: ^4.2.1
     redux-logger: ^3.0.6
