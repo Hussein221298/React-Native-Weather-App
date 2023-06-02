@@ -30,7 +30,7 @@ export default function weatherDisplay(props) {
 }
 
 const styles = StyleSheet.create({
-  container: { display: 'flex', paddingBottom: 30, paddingTop: 100, alignItems: 'center', height: ((height + statusBarHeight)/2) },
+  container: { display: 'flex', paddingTop: 60, alignItems: 'center', height: ((height - 40)/2) },
   currentTemperatureContainer: { display: 'flex', flexDirection: 'row', alignItems: 'flex-start' },
   temperatureValue: { fontSize: 100, color: '#FFF' },
   temperatureUnit: { marginTop: 20, fontSize: 30, color: '#FFF' },

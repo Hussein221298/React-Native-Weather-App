@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   container: {
     borderTopWidth: 2,
     borderTopColor: '#4e75b2',
-    height: ((height + statusBarHeight)/2),
+    height: ((height - 40)/2),
   },
   list: {
     display: 'flex',

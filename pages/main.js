@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions, StatusBar, Button } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, StatusBar, Button, TouchableOpacity } from 'react-native';
 import WeatherDisplay from '../components/weather-display';
 import HourlyForecastList from '../components/hourly-forecast-list';
 import { dailyDataRequested, dailyDataFailed, getDailyWeather } from '../store/daily-weather'
@@ -9,10 +9,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import getCurrentTemperature from '../utils/current-temperature'
 import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { height } = Dimensions.get('window');
 const statusBarHeight = StatusBar.currentHeight || 0;
 
+const goToSettingsPage = () => navigation.navigate('Settings');
 
 export default function MainPage({ navigation }) {
   const navigationProps = useNavigation();
@@ -53,15 +55,18 @@ export default function MainPage({ navigation }) {
     let pages = dailyData.dailyWeatherData.dailyWeather.map((dailyDataItem, index) => (
       <View style={styles.container} key={index}>
         <LinearGradient colors={['#89AFFF', '#000']} >
+          <View style={styles.settingsButton} >
+            <TouchableOpacity onPress={goToSettingsPage}>
+              <Icon name='gear' size={30} color='#FFF' />
+            </TouchableOpacity>
+          </View>
+
           <WeatherDisplay
-            style={ styles.weatherDisplay } 
             weather={dailyDataItem}
             temperatureUnit={dailyData.dailyWeatherData.metaInfo.temperatureUnit}
             currentTemperature={getCurrentTemperature(hourlyData.hourlyWeatherData.hourlyWeather[index])}
             city='Beirut'
           />
-
-          <Button title="Go to Settings" onPress={() => navigation.navigate('Settings')} />
 
           <HourlyForecastList
             hourlyData={hourlyData.hourlyWeatherData.hourlyWeather[index]}
@@ -80,7 +85,12 @@ export default function MainPage({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: (height + statusBarHeight),
+    height: height
+  },
+  settingsButton: {
+    paddingTop: (statusBarHeight + 10),
+    paddingRight: 20,
+    alignSelf: 'flex-end'
   }
 });
 
