@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, SafeAreaView, Dimensions, StatusBar } from 'react-native';
+import { StyleSheet, FlatList, SafeAreaView, Dimensions, StatusBar, BlurView } from 'react-native';
 import HourlyForecastItem from './hourly-forecast-item';
 
 const { height } = Dimensions.get('window');
@@ -26,13 +26,18 @@ export default function HourlyForecastList(props) {
 
 const styles = StyleSheet.create({
   container: {
-    borderTopWidth: 2,
-    borderTopColor: '#4e75b2',
+    borderWidth: 2,
+    borderColor: '#4e75b2',
     height: ((height - 40)/2),
+    borderRadius: 25,
+    paddingHorizontal: 10,
   },
   list: {
     display: 'flex',
     flexDirection: 'column',
+  },
+  background: {
+    ...StyleSheet.absoluteFillObject,
   },
  });
  

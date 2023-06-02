@@ -17,14 +17,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft: 5,
-    paddingRight: 5,
-    backgroundColor: '#89AFFF',
-    opacity: 0.8,
     borderBottomWidth: 1,
     borderBottomColor: '#FFF',
-    paddingBottom: 10,
-    paddingTop: 10,
+    padding: 20
   },
   text: {
     color: '#FFF',

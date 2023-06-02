@@ -14,8 +14,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const { height } = Dimensions.get('window');
 const statusBarHeight = StatusBar.currentHeight || 0;
 
-const goToSettingsPage = () => navigation.navigate('Settings');
-
 export default function MainPage({ navigation }) {
   const navigationProps = useNavigation();
 
@@ -56,7 +54,7 @@ export default function MainPage({ navigation }) {
       <View style={styles.container} key={index}>
         <LinearGradient colors={['#89AFFF', '#000']} >
           <View style={styles.settingsButton} >
-            <TouchableOpacity onPress={goToSettingsPage}>
+            <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
               <Icon name='gear' size={30} color='#FFF' />
             </TouchableOpacity>
           </View>
@@ -68,9 +66,12 @@ export default function MainPage({ navigation }) {
             city='Beirut'
           />
 
-          <HourlyForecastList
-            hourlyData={hourlyData.hourlyWeatherData.hourlyWeather[index]}
-          />
+           <View style={styles.hourlyForecastContainer}>
+            <HourlyForecastList
+              style={styles.hourlyForecastList}
+              hourlyData={hourlyData.hourlyWeatherData.hourlyWeather[index]}
+            />
+          </View>
         </LinearGradient>
       </View>
     ));
@@ -91,6 +92,9 @@ const styles = StyleSheet.create({
     paddingTop: (statusBarHeight + 10),
     paddingRight: 20,
     alignSelf: 'flex-end'
+  },
+  hourlyForecastContainer: {
+    paddingHorizontal: 10
   }
 });
 
