@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Dimensions, StatusBar } from 'react-native';
-import WeatherDisplay from './../components/weather-display';
-import HourlyForecastList from './../components/hourly-forecast-list';
+import WeatherDisplay from '../components/weather-display';
+import HourlyForecastList from '../components/hourly-forecast-list';
 import { dailyDataRequested, dailyDataFailed, getDailyWeather } from '../store/daily-weather'
 import { hourlyDataRequested, hourlyDataFailed, getHourlyWeather } from '../store/hourly-weather'
 import React, { useEffect } from 'react';

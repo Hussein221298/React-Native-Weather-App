@@ -4,7 +4,7 @@ const api = ({ dispatch }) => next => async action => {
   if (action.type !== "apiRequest") {
     return next(action);
   }
-  const {url, method, data, onStart, onSuccess, onError } = action.payload;
+  const {url, method, onStart, onSuccess, onError } = action.payload;
 
   if (onStart) {
     dispatch({ type: onStart });
@@ -12,8 +12,7 @@ const api = ({ dispatch }) => next => async action => {
   try {
     const response = await axios.request({
       url,
-      method,
-      data
+      method
     });
     dispatch({ type: onSuccess, payload: response.data });
   } catch(error) {
