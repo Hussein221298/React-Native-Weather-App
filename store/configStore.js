@@ -12,7 +12,7 @@ const store = configureStore({
         hourlyData: hourlyReducer,
         settings: settingsReducer
     },
-    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), logger, api, error]
+    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), api, error]
 });
 
 export default store; 

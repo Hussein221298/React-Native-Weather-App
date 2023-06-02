@@ -4,7 +4,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 export default TemperatureUnitOptions = ({ selectedTemperatureUnit, handleUnitChange }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Select Temperature Unit:</Text>
+      <Text style={styles.label}>Temperature Unit:</Text>
+
       <TouchableOpacity
         style={[styles.option, selectedTemperatureUnit.name === 'celsius' && styles.selectedOption]}
         onPress={() => handleUnitChange({
@@ -14,6 +15,7 @@ export default TemperatureUnitOptions = ({ selectedTemperatureUnit, handleUnitCh
       >
         <Text style={styles.optionText}>°C</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={[styles.option, selectedTemperatureUnit.name === 'fahrenheit' && styles.selectedOption]}
         onPress={() => handleUnitChange({
@@ -23,30 +25,32 @@ export default TemperatureUnitOptions = ({ selectedTemperatureUnit, handleUnitCh
       >
         <Text style={styles.optionText}>°F</Text>
       </TouchableOpacity>
-      <Text style={styles.selectedUnit}>Selected Unit: {selectedTemperatureUnit.name}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row'
   },
   label: {
     fontSize: 16,
     marginBottom: 10,
+    paddingRight: 10
   },
   option: {
-    width: 100,
+    width: 70,
     height: 50,
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10,
+    margin: 10,
   },
   selectedOption: {
     backgroundColor: 'lightblue',

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, StatusBar, Button } from 'react-native';
 import WeatherDisplay from '../components/weather-display';
 import HourlyForecastList from '../components/hourly-forecast-list';
 import { dailyDataRequested, dailyDataFailed, getDailyWeather } from '../store/daily-weather'
@@ -8,11 +8,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
 import getCurrentTemperature from '../utils/current-temperature'
 import Swiper from 'react-native-swiper';
+import { useNavigation } from '@react-navigation/native';
 
 const { height } = Dimensions.get('window');
 const statusBarHeight = StatusBar.currentHeight || 0;
 
-export default function MainPage() {
+
+export default function MainPage({ navigation }) {
+  const navigationProps = useNavigation();
+
   const dispatch = useDispatch();
   const { dailyData, hourlyData } = useSelector(state => state);
   useEffect(() => {
@@ -36,6 +40,9 @@ export default function MainPage() {
         onError: hourlyDataFailed().type
       }
     });
+    navigationProps.setOptions({
+      headerShown: false
+    });
   } ,[]);
 
   if (dailyData.error || hourlyData.error) {
@@ -53,6 +60,9 @@ export default function MainPage() {
             currentTemperature={getCurrentTemperature(hourlyData.hourlyWeatherData.hourlyWeather[index])}
             city='Beirut'
           />
+
+          <Button title="Go to Settings" onPress={() => navigation.navigate('Settings')} />
+
           <HourlyForecastList
             hourlyData={hourlyData.hourlyWeatherData.hourlyWeather[index]}
           />

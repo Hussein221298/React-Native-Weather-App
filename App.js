@@ -3,15 +3,21 @@ import MainPage from './pages/main';
 import SettingsPage from './pages/settings';
 import { Provider } from 'react-redux';
 import store from './store/configStore';
-        {/* <MainPage /> */}
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Navigation } from 'react-native-navigation';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <Provider store={ store }>
-      <View style={styles.container}>
-        <MainPage />
-        <SettingsPage />
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Main" component={MainPage} />
+          <Stack.Screen name="Settings" component={SettingsPage} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </Provider>
   );
 }

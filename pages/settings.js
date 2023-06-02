@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import DropdownMenu from '../components/dropdown-menu';
 import TemperatureUnitOptions from '../components/temperature-unit-options';
 
-const statusBarHeight = StatusBar.currentHeight || 0;
-
-export default function SettingsPage() {
+export default function SettingsPage({ navigation }) {
   const dispatch = useDispatch();
   const { city, temperatureUnit } = useSelector(state => state.settings);
 
@@ -26,6 +24,7 @@ export default function SettingsPage() {
         city: selectedOption
       }
     });
+    navigation.navigate('Main');
   }
 
   return (
@@ -49,7 +48,6 @@ export default function SettingsPage() {
 }
 const styles = StyleSheet.create({
   container: {
-    paddingTop: statusBarHeight,
     backgroundColor: '#FFF',
     height: '100%',
     width: '100%',
