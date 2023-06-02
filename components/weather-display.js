@@ -12,7 +12,7 @@ export default function weatherDisplay(props) {
       </Text>
       <View style={styles.currentTemperatureContainer}>
         <Text style={styles.temperatureValue}>{props.currentTemperature}</Text>
-        <Text style={styles.temperatureUnit}>{props.temperatureUnit}</Text>
+        <Text style={styles.temperatureUnit}>{props.temperatureUnit.symbol}</Text>
       </View>
 
       <Text style={styles.weatherCode}>
@@ -21,9 +21,9 @@ export default function weatherDisplay(props) {
 
       <View style={styles.temperatureRange}>
         <Text style={styles.temperatureRangeValue}>
-          {props.weather?.minTemp} - {props.weather?.maxTemp} 
+          {props.weather.minTemp} - {props.weather.maxTemp} 
         </Text>
-        <Text style={styles.temperatureRangeUnit}>{props.temperatureUnit}</Text>
+        <Text style={styles.temperatureRangeUnit}>{props.temperatureUnit.symbol}</Text>
       </View>
     </View>
   );

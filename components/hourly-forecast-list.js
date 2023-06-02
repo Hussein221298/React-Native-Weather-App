@@ -4,6 +4,7 @@ import HourlyForecastItem from './hourly-forecast-item';
 const { height } = Dimensions.get('window');
 const statusBarHeight = StatusBar.currentHeight || 0;
 
+
 const forecastItem = ({ item }) => (
   <HourlyForecastItem 
     forecast={item}
@@ -11,11 +12,13 @@ const forecastItem = ({ item }) => (
 );
 
 export default function HourlyForecastList(props) {
+  let forecastItemProps = props.hourlyData.map(item => ({ ...item, temperatureUnit: props.temperatureUnit }));
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         style={styles.list}
-        data={props.hourlyData}
+        data={forecastItemProps}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, index) => index}
         renderItem={forecastItem}

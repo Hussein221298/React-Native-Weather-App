@@ -24,7 +24,6 @@ const DropdownMenu = ({ selectedOption, setSelectedOption}) => {
   useEffect(() => {
     (async () => {
       if (searchQuery.length > 1) {
-        console.log(searchQuery)
         try {
           const response = await axios.request({
             url: `https://geocoding-api.open-meteo.com/v1/search?name=${searchQuery}&count=5`,
@@ -34,7 +33,7 @@ const DropdownMenu = ({ selectedOption, setSelectedOption}) => {
           let options = serialize(response);
           setDropdownOptions(options);
         } catch(error) {
-            console.log(error);
+          console.log(error);
             throw error;
         }
       } else {

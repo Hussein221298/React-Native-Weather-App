@@ -18,12 +18,12 @@ export default function MainPage({ navigation }) {
   const navigationProps = useNavigation();
 
   const dispatch = useDispatch();
-  const { dailyData, hourlyData } = useSelector(state => state);
+  const { settings, dailyData, hourlyData } = useSelector(state => state);
   useEffect(() => {
     dispatch({
       type: 'apiRequest',
       payload: {
-        url: "https://api.open-meteo.com/v1/forecast?latitude=33.89&longitude=35.50&past_days=2&timezone=EET&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min",
+        url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=GMT&temperature_unit=${settings.temperatureUnit.name}&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min`,
         method: "GET",
         onStart: dailyDataRequested().type,
         onSuccess: getDailyWeather().type,
@@ -33,7 +33,7 @@ export default function MainPage({ navigation }) {
     dispatch({
       type: 'apiRequest',
       payload: {
-        url: "https://api.open-meteo.com/v1/forecast?latitude=33.89&longitude=35.50&past_days=2&timezone=EET&hourly=temperature_2m,weathercode,is_day",
+        url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=GMT&temperature_unit=${settings.temperatureUnit.name}&hourly=temperature_2m,weathercode,is_day`,
         method: "GET",
         onStart: hourlyDataRequested().type,
         onSuccess: getHourlyWeather().type,
@@ -43,7 +43,7 @@ export default function MainPage({ navigation }) {
     navigationProps.setOptions({
       headerShown: false
     });
-  } ,[]);
+  } ,[settings]);
 
   if (dailyData.error || hourlyData.error) {
     return <View><Text>ERROR</Text></View>;
@@ -61,15 +61,16 @@ export default function MainPage({ navigation }) {
 
           <WeatherDisplay
             weather={dailyDataItem}
-            temperatureUnit={dailyData.dailyWeatherData.metaInfo.temperatureUnit}
+            temperatureUnit={settings.temperatureUnit}
             currentTemperature={getCurrentTemperature(hourlyData.hourlyWeatherData.hourlyWeather[index])}
-            city='Beirut'
+            city={settings.city.label}
           />
 
            <View style={styles.hourlyForecastContainer}>
             <HourlyForecastList
               style={styles.hourlyForecastList}
               hourlyData={hourlyData.hourlyWeatherData.hourlyWeather[index]}
+              temperatureUnit={settings.temperatureUnit}
             />
           </View>
         </LinearGradient>

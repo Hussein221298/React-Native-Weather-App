@@ -5,9 +5,11 @@ import getHourFromDate from './../utils/get-hour-from-date'
 export default function HourlyForecastList(props) {
   return (
     <View style={ styles.container }>
-      <Text style={ styles.hour }>{getHourFromDate(props.forecast.date)}</Text>
+      <Text style={ [styles.text, styles.hour] }>{getHourFromDate(props.forecast.date)}</Text>
       <Text style={ styles.text }>{wmoMap(props.forecast.weatherCode)}</Text>
-      <Text style={ styles.text }>{props.forecast.temperature}</Text>
+      <View style={ styles.temperature }>
+        <Text style={ styles.text }>{props.forecast.temperature} {props.forecast.temperatureUnit.symbol}</Text>
+      </View>
     </View>
   );
 }
@@ -20,15 +22,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#FFF',
     padding: 20
-  },
-  text: {
+  }, text: {
     color: '#FFF',
     fontSize: 16,
+  }, hour: {
+    width: 50,
+  }, temperature: {
+    width: 50,
+    display: 'flex',
+    alignItems: 'flex-end'
   },
-  hour: {
-    width: 40,
-    color: '#FFF',
-    fontSize: 16,
-  }
  });
  
