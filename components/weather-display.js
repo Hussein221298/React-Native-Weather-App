@@ -1,13 +1,12 @@
-import { View, Text, StyleSheet, Dimensions, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import wmoMap from '../utils/wmo-codes-to-description'
 
 const { height } = Dimensions.get('window');
-const statusBarHeight = StatusBar.currentHeight || 0;
 
 export default function weatherDisplay(props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.city}>
+      <Text style={ styles.city }>
         {props.city}
       </Text>
       <View style={styles.currentTemperatureContainer}>

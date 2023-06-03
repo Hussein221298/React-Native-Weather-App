@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions, StatusBar, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity } from 'react-native';
 import WeatherDisplay from '../components/weather-display';
 import HourlyForecastList from '../components/hourly-forecast-list';
 import { dailyDataRequested, dailyDataFailed, getDailyWeather } from '../store/daily-weather'
@@ -10,7 +10,7 @@ import getCurrentTemperature from '../utils/current-temperature'
 import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import formatDate from '../utils/format-date'
+import formatDate from '../utils/format-date';
 
 const { height } = Dimensions.get('window');
 const statusBarHeight = StatusBar.currentHeight || 0;
