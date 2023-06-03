@@ -10,6 +10,7 @@ import getCurrentTemperature from '../utils/current-temperature'
 import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import formatDate from '../utils/format-date'
 
 const { height } = Dimensions.get('window');
 const statusBarHeight = StatusBar.currentHeight || 0;
@@ -53,10 +54,16 @@ export default function MainPage({ navigation }) {
     let pages = dailyData.dailyWeatherData.dailyWeather.map((dailyDataItem, index) => (
       <View style={styles.container} key={index}>
         <LinearGradient colors={['#89AFFF', '#000']} >
-          <View style={styles.settingsButton} >
-            <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-              <Icon name='gear' size={30} color='#FFF' />
-            </TouchableOpacity>
+          <View style={styles.header}>
+            <View style={styles.date} >
+              <Text style={styles.dateText} >{formatDate(dailyDataItem.date)}</Text>
+            </View>
+
+            <View style={styles.settingsButton} >
+              <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+                <Icon name='gear' size={30} color='#FFF' />
+              </TouchableOpacity>
+            </View>
           </View>
 
           <WeatherDisplay
@@ -89,10 +96,22 @@ const styles = StyleSheet.create({
     width: '100%',
     height: height
   },
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   settingsButton: {
     paddingTop: (statusBarHeight + 10),
     paddingRight: 20,
-    alignSelf: 'flex-end'
+  },
+  date: {
+    paddingTop: (statusBarHeight + 15),
+    paddingLeft: 20,
+  }, dateText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 700
   },
   hourlyForecastContainer: {
     paddingHorizontal: 10
