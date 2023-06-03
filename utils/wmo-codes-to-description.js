@@ -1,63 +1,207 @@
 const WMO_MAP = {
   '0': {
-    description: "Clear Sky"
-  }, '1': {
-    description: "Mainly Clear"
-  }, '2': {
-    description: "Partly Cloudy"
-  }, '3': {
-    description: "Overcast"
-  }, '45': {
-    description: "Fog"
-  }, '48': {
-    description: "Depositing Rime Fog"
-  }, '51': {
-    description: "Light Drizzle"
-  }, '53': {
-    description: "Moderate Drizzle"
-  }, '55': {
-    description: "Intensity Drizzle"
-  }, '56': {
-    description: "Light Freezing Drizzle"
-  }, '57': {
-    description: "Dense Intensity Freezing Drizzle"
-  }, '61': {
-    description: "Slight Rain"
-  }, '63': {
-    description: "Moderate Rain"
-  }, '65': {
-    description: "Heavy Intensity Rain"
-  }, '66': {
-    description: "Light Freezing Rain"
-  }, '67': {
-    description: "Heavy Intensity Freezing Rain"
-  }, '71': {
-    description: "Slight Snow Fall"
-  }, '73': {
-    description: "Moderate Snow Fall"
-  }, '75': {
-    description: "Heavy Intensity Snow Fall"
-  }, '77': {
-    description: "Snow Grains"
-  }, '80': {
-    description: "Slight Rain Showers"
-  }, '81': {
-    description: "Moderate Rain Showers"
-  }, '82': {
-    description: "Violent Rain Showers"
-  }, '85': {
-    description: "Slight Snow showers"
-  }, '86': {
-    description: "Heavy  Snow showers"
-  }, '95': {
-    description: "Thunderstorm"
-  }, '96': {
-    description: "Thunderstorm with slight hail"
-  }, '99': {
-    description: "Thunderstorm with heavy hail"
+    description: 'Clear Sky',
+    nightIcon: 'night-clear',
+    dayIcon: 'sun',
+    nightSource: 'Fontisto',
+    daySource: 'Feather',
+  },
+  '1': {
+    description: 'Mainly Clear',
+    nightIcon: 'night-clear',
+    dayIcon: 'sun',
+    nightSource: 'Fontisto',
+    daySource: 'Feather',
+  },
+  '2': {
+    description: 'Partly Cloudy',
+    nightIcon: 'cloud-moon',
+    dayIcon: 'cloud-sun',
+    nightSource: 'FontAwesome5',
+    daySource: 'FontAwesome5',
+  },
+  '3': {
+    description: 'Overcast',
+    nightIcon: 'night-alt-cloudy',
+    dayIcon: 'day-cloudy',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '45': {
+    description: 'Fog',
+    nightIcon: 'weather-fog',
+    dayIcon: 'weather-fog',
+    nightSource: 'MaterialCommunityIcons',
+    daySource: 'MaterialCommunityIcons',
+  },
+  '48': {
+    description: 'Depositing Rime Fog',
+    nightIcon: 'weather-fog',
+    dayIcon: 'weather-fog',
+    nightSource: 'MaterialCommunityIcons',
+    daySource: 'MaterialCommunityIcons',
+  },
+  '51': {
+    description: 'Light Drizzle',
+    nightIcon: 'night-alt-rain',
+    dayIcon: 'day-rain',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '53': {
+    description: 'Moderate Drizzle',
+    nightIcon: 'night-alt-rain',
+    dayIcon: 'day-rain',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '55': {
+    description: 'Intensity Drizzle',
+    nightIcon: 'night-alt-rain',
+    dayIcon: 'day-rain',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '56': {
+    description: 'Light Freezing Drizzle',
+    nightIcon: 'night-alt-snow',
+    dayIcon: 'day-snow',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '57': {
+    description: 'Dense Intensity Freezing Drizzle',
+    nightIcon: 'night-alt-snow',
+    dayIcon: 'day-snow',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '61': {
+    description: 'Slight Rain',
+    nightIcon: 'night-alt-rain',
+    dayIcon: 'day-rain',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '63': {
+    description: 'Moderate Rain',
+    nightIcon: 'night-alt-rain',
+    dayIcon: 'day-rain',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '65': {
+    description: 'Heavy Intensity Rain',
+    nightIcon: 'night-alt-rain',
+    dayIcon: 'day-rain',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '66': {
+    description: 'Light Freezing Rain',
+    nightIcon: 'night-alt-snow',
+    dayIcon: 'day-snow',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '67': {
+    description: 'Heavy Intensity Freezing Rain',
+    nightIcon: 'night-alt-snow',
+    dayIcon: 'day-snow',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '71': {
+    description: 'Slight Snow Fall',
+    nightIcon: 'night-alt-snow',
+    dayIcon: 'day-snow',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '73': {
+    description: 'Moderate Snow Fall',
+    nightIcon: 'night-alt-snow',
+    dayIcon: 'day-snow',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '75': {
+    description: 'Heavy Intensity Snow Fall',
+    nightIcon: 'night-alt-snow',
+    dayIcon: 'day-snow',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '77': {
+    description: 'Snow Grains',
+    nightIcon: 'night-alt-snow',
+    dayIcon: 'day-snow',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '80': {
+    description: 'Slight Rain Showers',
+    nightIcon: 'night-alt-rain',
+    dayIcon: 'day-rain',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '81': {
+    description: 'Moderate Rain Showers',
+    nightIcon: 'night-alt-rain',
+    dayIcon: 'day-rain',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '82': {
+    description: 'Violent Rain Showers',
+    nightIcon: 'night-alt-rain',
+    dayIcon: 'day-rain',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '85': {
+    description: 'Slight Snow showers',
+    nightIcon: 'night-alt-snow',
+    dayIcon: 'day-snow',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '86': {
+    description: 'Heavy  Snow showers',
+    nightIcon: 'night-alt-snow',
+    dayIcon: 'day-snow',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '95': {
+    description: 'Thunderstorm',
+    nightIcon: 'night-alt-lightning',
+    dayIcon: 'day-lightning',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '96': {
+    description: 'Thunderstorm with slight hail',
+    nightIcon: 'night-alt-lightning',
+    dayIcon: 'day-lightning',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '99': {
+    description: 'Thunderstorm with heavy hail',
+    nightIcon: 'night-alt-lightning',
+    dayIcon: 'day-lightning',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
+  },
+  '404': {
+    description: "Weather Code Not Found",
+    nightIcon: 'Weather Code Not Found',
+    dayIcon: 'Weather Code Not Found'
   }
 };
 
 export default (code) => {
-  return WMO_MAP[code] ? WMO_MAP[code].description : '---';
+  return WMO_MAP[code] ? WMO_MAP[code] : WMO_MAP['404'];
 }

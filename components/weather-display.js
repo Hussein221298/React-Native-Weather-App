@@ -15,7 +15,7 @@ export default function weatherDisplay(props) {
       </View>
 
       <Text style={styles.weatherCode}>
-        {wmoMap(props.weather.weatherCode)}
+        {wmoMap(props.weather.weatherCode).description}
       </Text>
 
       <View style={styles.temperatureRange}>

@@ -12,7 +12,11 @@ const forecastItem = ({ item }) => (
 );
 
 export default function HourlyForecastList(props) {
-  let forecastItemProps = props.hourlyData.map(item => ({ ...item, temperatureUnit: props.temperatureUnit }));
+  let forecastItemProps = props.hourlyData.map((item, index) => ({ 
+    ...item,
+    temperatureUnit: props.temperatureUnit,
+    isLastItem: index === props.hourlyData.length -1 
+  }));
 
   return (
     <SafeAreaView style={styles.container}>

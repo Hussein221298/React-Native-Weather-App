@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import store from './store/configStore';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Navigation } from 'react-native-navigation';
 
 const Stack = createNativeStackNavigator();
 
