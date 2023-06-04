@@ -4,18 +4,20 @@ import serializeHourlyData from './../adapters/serialize-hourly-data';
 const hourlyWeatherSlice = createSlice({
   name: "hourlyWeather",
   initialState: {
-    loading: false,
     hourlyWeatherData: {},
+    loading: false,
     error: false,
+    errorMessage: '',
     initialFetch: false,
   },
   reducers: {
     hourlyDataRequested: (state) => {
       state.loading = true;
     },
-    hourlyDataFailed: (state) => {
+    hourlyDataFailed: (state, action) => {
       state.loading = false;
       state.error = true;
+      state.errorMessage = action.payload.errorMessage
     },
     getHourlyWeather: (state, action) => {
       state.hourlyWeatherData = serializeHourlyData(action.payload);

@@ -11,49 +11,63 @@ import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../utils/format-date';
+import Loading from './loading';
+import ErrorPage from './error';
 
 const { height } = Dimensions.get('window');
 const statusBarHeight = StatusBar.currentHeight || 0;
 
-export default function MainPage({ navigation }) {
+const fetchTemperatureDate = ({ dispatch, settings }) => {
+  dispatch({
+    type: 'apiRequest',
+    payload: {
+      url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=GMT&temperature_unit=${settings.temperatureUnit.name}&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min`,
+      method: 'GET',
+      onStart: dailyDataRequested().type,
+      onSuccess: getDailyWeather().type,
+      onError: dailyDataFailed().type
+    }
+  });
+  dispatch({
+    type: 'apiRequest',
+    payload: {
+      url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=GMT&temperature_unit=${settings.temperatureUnit.name}&hourly=temperature_2m,weathercode,is_day`,
+      method: 'GET',
+      onStart: hourlyDataRequested().type,
+      onSuccess: getHourlyWeather().type,
+      onError: hourlyDataFailed().type
+    }
+  });
+}
+
+export default MainPage = ({ navigation }) => {
   const navigationProps = useNavigation();
+
+  const refresh = () => {
+    fetchTemperatureDate({ dispatch, settings });
+  }
 
   const dispatch = useDispatch();
   const { settings, dailyData, hourlyData } = useSelector(state => state);
   useEffect(() => {
-    dispatch({
-      type: 'apiRequest',
-      payload: {
-        url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=GMT&temperature_unit=${settings.temperatureUnit.name}&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min`,
-        method: 'GET',
-        onStart: dailyDataRequested().type,
-        onSuccess: getDailyWeather().type,
-        onError: dailyDataFailed().type
-      }
-    });
-    dispatch({
-      type: 'apiRequest',
-      payload: {
-        url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=GMT&temperature_unit=${settings.temperatureUnit.name}&hourly=temperature_2m,weathercode,is_day`,
-        method: 'GET',
-        onStart: hourlyDataRequested().type,
-        onSuccess: getHourlyWeather().type,
-        onError: hourlyDataFailed().type
-      }
-    });
+    fetchTemperatureDate({ dispatch, settings });
     navigationProps.setOptions({
       headerShown: false
     });
   } ,[settings]);
 
   if (dailyData.error || hourlyData.error) {
-    return <View><Text>ERROR</Text></View>;
+  return <ErrorPage 
+    dailyDataErrorMessage={dailyData.errorMessage}
+    hourlyDataErrorMessage={hourlyData.errorMessage} 
+    onRefresh={refresh}
+  />;
   } else if (dailyData.loading || hourlyData.loading) {
-    return <View><Text>...Loading</Text></View>;
+    return <Loading />;
   } else if (dailyData.initialFetch && hourlyData.initialFetch) {
     let pages = dailyData.dailyWeatherData.dailyWeather.map((dailyDataItem, index) => (
       <View style={styles.container} key={index}>
-        <LinearGradient colors={['#89AFFF', '#000']} >
+        <LinearGradient colors={['#800080', '#000']} >
           <View style={styles.header}>
             <View style={styles.date} >
               <Text style={styles.dateText} >{formatDate(dailyDataItem.date)}</Text>

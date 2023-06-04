@@ -16,7 +16,7 @@ const api = ({ dispatch }) => next => async action => {
     });
     dispatch({ type: onSuccess, payload: response.data });
   } catch(error) {
-    dispatch({ type: onError });
+    dispatch({ type: onError, payload: { errorMessage: error.message } });
     dispatch({ type: "SHOW_ERROR", payload: { error: error.message }});
   }
 }

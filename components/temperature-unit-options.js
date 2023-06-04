@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const TemperatureUnitOptions = ({ selectedTemperatureUnit, handleUnitChange }) => {
+export default TemperatureUnitOptions = ({ selectedTemperatureUnit, handleUnitChange }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Temperature Unit:</Text>
@@ -67,5 +67,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-export default TemperatureUnitOptions;
