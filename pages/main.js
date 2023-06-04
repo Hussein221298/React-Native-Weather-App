@@ -119,11 +119,11 @@ const styles = StyleSheet.create({
   }, header: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    height: (statusBarHeight + 40)
   }, date: {
     paddingTop: (statusBarHeight + 10),
     paddingLeft: 20,
-    width: 100
   }, dateText: (theme) => ({
     color: theme.textColor,
     fontSize: 16,
