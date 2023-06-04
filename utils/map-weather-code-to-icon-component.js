@@ -28,8 +28,6 @@ const mapIconSourceToSourceComponent = (source) => {
     return Fontisto;
   } else if (source === 'Feather') {
     return Feather;
-  } else if (source === 'FontAwesome5') {
-    return FontAwesome5;
   } else if (source === 'MaterialCommunityIcons') {
     return MaterialCommunityIcons;
   }

@@ -15,10 +15,10 @@ const WMO_MAP = {
   },
   '2': {
     description: 'Partly Cloudy',
-    nightIcon: 'cloud-moon',
-    dayIcon: 'cloud-sun',
-    nightSource: 'FontAwesome5',
-    daySource: 'FontAwesome5',
+    nightIcon: 'night-alt-cloudy',
+    dayIcon: 'day-cloudy',
+    nightSource: 'Fontisto',
+    daySource: 'Fontisto',
   },
   '3': {
     description: 'Overcast',
