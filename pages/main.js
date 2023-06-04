@@ -4,7 +4,7 @@ import WeatherDisplay from '../components/weather-display';
 import HourlyForecastList from '../components/hourly-forecast-list';
 import { dailyDataRequested, dailyDataFailed, getDailyWeather } from '../store/daily-weather'
 import { hourlyDataRequested, hourlyDataFailed, getHourlyWeather } from '../store/hourly-weather'
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import currentTemperature from '../utils/current-temperature'
 import averageTemperature from '../utils/average-temperature'
@@ -13,8 +13,10 @@ import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../utils/format-date';
+import isDay from '../utils/is-day';
 import Loading from './loading';
 import ErrorPage from './error';
+import { ThemeContext } from './../theme-context';
 
 const { height } = Dimensions.get('window');
 const statusBarHeight = StatusBar.currentHeight || 0;
@@ -44,6 +46,7 @@ const fetchTemperatureDate = ({ dispatch, settings }) => {
 
 export default MainPage = ({ navigation }) => {
   const navigationProps = useNavigation();
+  const theme = useContext(ThemeContext);
 
   const refresh = () => {
     fetchTemperatureDate({ dispatch, settings });
@@ -69,11 +72,11 @@ export default MainPage = ({ navigation }) => {
   } else if (dailyData.initialFetch && hourlyData.initialFetch) {
     let pages = dailyData.dailyWeatherData.dailyWeather.map((dailyDataItem, index) => (
       <View style={styles.container} key={index}>
-        <LinearGradient colors={['#800080', '#000']} >
+        <LinearGradient colors={isDay(hourlyData.hourlyWeatherData.hourlyWeather[index]) ? theme.dayModeBackground: theme.nightModeBackground} >
           <View style={styles.header}>
             <View style={styles.date} >
-              {isToday(dailyDataItem.date) && <Text style={styles.dateText}>Today</Text>}
-              <Text style={styles.dateText} >{formatDate(dailyDataItem.date)}</Text>
+              {isToday(dailyDataItem.date) && <Text style={styles.dateText(theme)}>Today</Text>}
+              <Text style={styles.dateText(theme)} >{formatDate(dailyDataItem.date)}</Text>
             </View>
 
             <View style={styles.settingsButton} >
@@ -121,17 +124,13 @@ const styles = StyleSheet.create({
     paddingTop: (statusBarHeight + 10),
     paddingLeft: 20,
     width: 100
-  }, dateText: {
-    color: '#FFF',
+  }, dateText: (theme) => ({
+    color: theme.textColor,
     fontSize: 16,
-  }, settingsButton: {
+  }), settingsButton: {
     paddingTop: (statusBarHeight + 10),
     paddingRight: 20,
   }, hourlyForecastContainer: {
     paddingHorizontal: 10
   }
 });
-
-// Blue: ['#89AFFF', '#000']
-// Purple: ['#800080', '#000']
-// TextColor: '#FFF

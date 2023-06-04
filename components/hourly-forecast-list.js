@@ -1,8 +1,10 @@
-import { StyleSheet, FlatList, SafeAreaView, Dimensions, StatusBar, BlurView } from 'react-native';
+import { StyleSheet, FlatList, SafeAreaView, Dimensions } from 'react-native';
 import HourlyForecastItem from './hourly-forecast-item';
+import { ThemeContext } from './../theme-context';
+import { useContext } from 'react';
+import isDay from '../utils/is-day';
 
 const { height } = Dimensions.get('window');
-const statusBarHeight = StatusBar.currentHeight || 0;
 
 
 const forecastItem = ({ item }) => (
@@ -12,6 +14,8 @@ const forecastItem = ({ item }) => (
 );
 
 export default function HourlyForecastList(props) {
+  const theme = useContext(ThemeContext);
+
   let forecastItemProps = props.hourlyData.map((item, index) => ({ 
     ...item,
     temperatureUnit: props.temperatureUnit,
@@ -19,7 +23,7 @@ export default function HourlyForecastList(props) {
   }));
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container(isDay(props.hourlyData) ? theme.dayModeBorder: theme.nightModeBorder)}>
       <FlatList
         style={styles.list}
         data={forecastItemProps}
@@ -32,18 +36,16 @@ export default function HourlyForecastList(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: (borderColor) => ({
     borderWidth: 2,
-    borderColor: '#4e75b2',
+    borderColor: borderColor,
     height: ((height - 40)/2),
     borderRadius: 25,
     paddingHorizontal: 10,
-  },
-  list: {
+  }), list: {
     display: 'flex',
     flexDirection: 'column',
-  },
-  background: {
+  }, background: {
     ...StyleSheet.absoluteFillObject,
   },
  });
