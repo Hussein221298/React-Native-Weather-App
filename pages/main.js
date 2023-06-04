@@ -6,7 +6,9 @@ import { dailyDataRequested, dailyDataFailed, getDailyWeather } from '../store/d
 import { hourlyDataRequested, hourlyDataFailed, getHourlyWeather } from '../store/hourly-weather'
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import getCurrentTemperature from '../utils/current-temperature'
+import currentTemperature from '../utils/current-temperature'
+import averageTemperature from '../utils/average-temperature'
+import isToday from '../utils/is-today'
 import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -70,6 +72,7 @@ export default MainPage = ({ navigation }) => {
         <LinearGradient colors={['#800080', '#000']} >
           <View style={styles.header}>
             <View style={styles.date} >
+              {isToday(dailyDataItem.date) && <Text style={styles.dateText}>Today</Text>}
               <Text style={styles.dateText} >{formatDate(dailyDataItem.date)}</Text>
             </View>
 
@@ -83,11 +86,13 @@ export default MainPage = ({ navigation }) => {
           <WeatherDisplay
             weather={dailyDataItem}
             temperatureUnit={settings.temperatureUnit}
-            currentTemperature={getCurrentTemperature(hourlyData.hourlyWeatherData.hourlyWeather[index])}
+            currentTemperature={ isToday(dailyDataItem.date) ? currentTemperature(hourlyData.hourlyWeatherData.hourlyWeather[index]):
+              averageTemperature(hourlyData.hourlyWeatherData.hourlyWeather[index])
+            }
             city={settings.city.label}
           />
-
-           <View style={styles.hourlyForecastContainer}>
+          
+          <View style={styles.hourlyForecastContainer}>
             <HourlyForecastList
               hourlyData={hourlyData.hourlyWeatherData.hourlyWeather[index]}
               temperatureUnit={settings.temperatureUnit}
@@ -97,11 +102,11 @@ export default MainPage = ({ navigation }) => {
       </View>
     ));
     return (
-      <Swiper showsPagination={false}>
+      <Swiper showsPagination={false} index={2}>
         {pages}
       </Swiper>
     );
-  }
+  };
 }
 
 const styles = StyleSheet.create({
