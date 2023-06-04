@@ -12,8 +12,6 @@ export default function serializeDailyData(apiResponse) {
     dailyWeather = [ 
       ...dailyWeather,
       {
-        apparentMaxTemp: daily.apparent_temperature_max[i],
-        apparentMinTemp: daily.apparent_temperature_max[i],
         minTemp: daily.temperature_2m_min[i],
         maxTemp: daily.temperature_2m_max[i],
         date: daily.time[i],
