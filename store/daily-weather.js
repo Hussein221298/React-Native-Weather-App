@@ -14,10 +14,10 @@ const dailyWeatherSlice = createSlice({
     dailyDataRequested: (state) => {
       state.loading = true;
       state.error = false;
+      state.errorMessage = ''
     },
     dailyDataFailed: (state, action) => {
       state.loading = false;
-      state.error = true;
       state.error = true;
       state.errorMessage = action.payload.errorMessage
     },
@@ -26,6 +26,7 @@ const dailyWeatherSlice = createSlice({
       state.loading = false;
       state.initialFetch = true;
       state.error = false;
+      state.errorMessage = ''
     }
   }
 });

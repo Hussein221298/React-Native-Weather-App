@@ -13,6 +13,8 @@ const hourlyWeatherSlice = createSlice({
   reducers: {
     hourlyDataRequested: (state) => {
       state.loading = true;
+      state.error = false;
+      state.errorMessage = ''
     },
     hourlyDataFailed: (state, action) => {
       state.loading = false;
@@ -23,6 +25,8 @@ const hourlyWeatherSlice = createSlice({
       state.hourlyWeatherData = serializeHourlyData(action.payload);
       state.loading = false;
       state.initialFetch = true;
+      state.error = false;
+      state.errorMessage = ''
     }
   }
 });

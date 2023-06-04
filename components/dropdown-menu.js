@@ -27,7 +27,7 @@ const DropdownMenu = ({ selectedOption, setSelectedOption}) => {
         try {
           const response = await axios.request({
             url: `https://geocoding-api.open-meteo.com/v1/search?name=${searchQuery}&count=5`,
-            method: "GET",
+            method: 'GET',
           });
 
           let options = serialize(response);
@@ -90,31 +90,25 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 4,
     overflow: 'hidden',
-  },
-  input: {
+  }, input: {
     height: 40,
-    color: 'green',
     paddingHorizontal: 10,
+    color: '#000',
+    fontWeight: '700',
+    fontSize: 16
   },
   dropdownContainer: {
     maxHeight: 200,
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 4,
-  },
-  optionContainer: {
+  }, optionContainer: {
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: 'lightgray',
-  },
-  optionText: {
+  }, optionText: {
     fontSize: 16,
-  },
-  selectedOptionText: {
-    marginTop: 10,
-    fontSize: 16,
-    fontWeight: 900,
-  },
+  }
 });
 
 export default DropdownMenu;

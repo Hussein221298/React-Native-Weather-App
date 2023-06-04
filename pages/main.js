@@ -21,7 +21,7 @@ const fetchTemperatureDate = ({ dispatch, settings }) => {
   dispatch({
     type: 'apiRequest',
     payload: {
-      url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=GMT&temperature_unit=${settings.temperatureUnit.name}&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min`,
+      url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=${settings.city.timezone}&temperature_unit=${settings.temperatureUnit.name}&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min`,
       method: 'GET',
       onStart: dailyDataRequested().type,
       onSuccess: getDailyWeather().type,
@@ -31,7 +31,7 @@ const fetchTemperatureDate = ({ dispatch, settings }) => {
   dispatch({
     type: 'apiRequest',
     payload: {
-      url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=GMT&temperature_unit=${settings.temperatureUnit.name}&hourly=temperature_2m,weathercode,is_day`,
+      url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=${settings.city.timezone}&temperature_unit=${settings.temperatureUnit.name}&hourly=temperature_2m,weathercode,is_day`,
       method: 'GET',
       onStart: hourlyDataRequested().type,
       onSuccess: getHourlyWeather().type,
@@ -56,12 +56,14 @@ export default MainPage = ({ navigation }) => {
     });
   } ,[settings]);
 
+  console.log(settings)
+  console.log(hourlyData)
   if (dailyData.error || hourlyData.error) {
-  return <ErrorPage 
-    dailyDataErrorMessage={dailyData.errorMessage}
-    hourlyDataErrorMessage={hourlyData.errorMessage} 
-    onRefresh={refresh}
-  />;
+    return <ErrorPage 
+      dailyDataErrorMessage={dailyData.errorMessage}
+      hourlyDataErrorMessage={hourlyData.errorMessage} 
+      onRefresh={refresh}
+    />;
   } else if (dailyData.loading || hourlyData.loading) {
     return <Loading />;
   } else if (dailyData.initialFetch && hourlyData.initialFetch) {
