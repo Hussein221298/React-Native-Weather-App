@@ -56,8 +56,6 @@ export default MainPage = ({ navigation }) => {
     });
   } ,[settings]);
 
-  console.log(settings)
-  console.log(hourlyData)
   if (dailyData.error || hourlyData.error) {
     return <ErrorPage 
       dailyDataErrorMessage={dailyData.errorMessage}
