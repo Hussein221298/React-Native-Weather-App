@@ -1,14 +1,13 @@
-import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-native';
-import { saveSettings } from '../store/settings'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { saveSettings } from '../store/settings';
 import DropdownMenu from '../components/dropdown-menu';
 import TemperatureUnitOptions from '../components/temperature-unit-options';
 
 export default function SettingsPage({ navigation }) {
   const dispatch = useDispatch();
-  const { city, temperatureUnit } = useSelector(state => state.settings);
-
+  const { city, temperatureUnit } = useSelector((state) => state.settings);
   const [selectedTemperatureUnit, setSelectedTemperatureUnit] = useState(temperatureUnit);
   const [selectedOption, setSelectedOption] = useState(city);
 
@@ -21,48 +20,40 @@ export default function SettingsPage({ navigation }) {
       type: saveSettings().type,
       payload: {
         temperatureUnit: selectedTemperatureUnit,
-        city: selectedOption
-      }
+        city: selectedOption,
+      },
     });
     navigation.navigate('Main');
-  }
+  };
 
   return (
-    <View style={styles.container} >
-      <DropdownMenu 
-        selectedOption={selectedOption}
-        setSelectedOption={setSelectedOption}
-      />
-
-      <TemperatureUnitOptions 
-        selectedTemperatureUnit={selectedTemperatureUnit}
-        handleUnitChange={handleUnitChange}
-      />
-
-      <TouchableOpacity style={styles.button} onPress={handleSubmitChanges}>
-        <Text style={styles.buttonText}>Submit Changes</Text>
+    <View style={styles.container}>
+      <DropdownMenu selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+      <TemperatureUnitOptions selectedTemperatureUnit={selectedTemperatureUnit} handleUnitChange={handleUnitChange} />
+      <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmitChanges}>
+        <Text style={styles.buttonText}>Save Changes</Text>
       </TouchableOpacity>
-
     </View>
-  )
+  );
 }
+
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: '#FFF',
-    height: '100%',
-    width: '100%',
-    paddingHorizontal: 5
-  },
-  button: {
-    backgroundColor: 'blue',
     paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 5,
+    paddingTop: 20,
+  }, buttonContainer: {
+    backgroundColor: '#2196F3',
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
     marginTop: 20,
-  },
-  buttonText: {
-    color: 'white',
+    alignSelf: 'center',
+  }, buttonText: {
+    color: '#FFF',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: 700,
+    textAlign: 'center',
   },
 });

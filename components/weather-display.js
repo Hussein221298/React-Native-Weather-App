@@ -29,14 +29,14 @@ export default function weatherDisplay(props) {
 }
 
 const styles = StyleSheet.create({
-  container: { display: 'flex', paddingTop: 60, alignItems: 'center', height: ((height - 40)/2) },
-  currentTemperatureContainer: { display: 'flex', flexDirection: 'row', alignItems: 'flex-start' },
+  container: { display: 'flex', paddingTop: 40, alignItems: 'center', height: ((height - 40)/2) },
+  city: { fontSize: 25, fontWeight: 700, color: '#FFF' },
+  currentTemperatureContainer: { display: 'flex', flexDirection: 'row', alignItems: 'flex-start', height: 100 },
   temperatureValue: { fontSize: 100, color: '#FFF' },
   temperatureUnit: { marginTop: 20, fontSize: 30, color: '#FFF' },
   temperatureRange: { display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginBottom: 10 },
-  temperatureRangeValue: { fontSize: 20, color: '#FFF' },
-  temperatureRangeUnit: { fontSize: 15, color: '#FFF' },
-  city: { fontSize: 25, color: '#FFF' },
+  temperatureRangeValue: { fontWeight: 700, fontSize: 20, color: '#FFF' },
+  temperatureRangeUnit: { fontWeight: 700, fontSize: 15, color: '#FFF' },
   weatherCode: { fontSize: 30, color: '#FFF', marginBottom: 3 }
 });
  

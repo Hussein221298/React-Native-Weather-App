@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import WeatherDisplay from '../components/weather-display';
 import HourlyForecastList from '../components/hourly-forecast-list';
 import { dailyDataRequested, dailyDataFailed, getDailyWeather } from '../store/daily-weather'
 import { hourlyDataRequested, hourlyDataFailed, getHourlyWeather } from '../store/hourly-weather'
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { LinearGradient } from 'expo-linear-gradient';
 import getCurrentTemperature from '../utils/current-temperature'
 import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native';
@@ -25,7 +25,7 @@ export default function MainPage({ navigation }) {
       type: 'apiRequest',
       payload: {
         url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=GMT&temperature_unit=${settings.temperatureUnit.name}&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min`,
-        method: "GET",
+        method: 'GET',
         onStart: dailyDataRequested().type,
         onSuccess: getDailyWeather().type,
         onError: dailyDataFailed().type
@@ -35,7 +35,7 @@ export default function MainPage({ navigation }) {
       type: 'apiRequest',
       payload: {
         url: `https://api.open-meteo.com/v1/forecast?latitude=${+settings.city.latitude}&longitude=${settings.city.longitude}&past_days=2&timezone=GMT&temperature_unit=${settings.temperatureUnit.name}&hourly=temperature_2m,weathercode,is_day`,
-        method: "GET",
+        method: 'GET',
         onStart: hourlyDataRequested().type,
         onSuccess: getHourlyWeather().type,
         onError: hourlyDataFailed().type
@@ -75,7 +75,6 @@ export default function MainPage({ navigation }) {
 
            <View style={styles.hourlyForecastContainer}>
             <HourlyForecastList
-              style={styles.hourlyForecastList}
               hourlyData={hourlyData.hourlyWeatherData.hourlyWeather[index]}
               temperatureUnit={settings.temperatureUnit}
             />
@@ -95,27 +94,25 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: height
-  },
-  header: {
+  }, header: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between'
-  },
-  settingsButton: {
+  }, date: {
     paddingTop: (statusBarHeight + 10),
-    paddingRight: 20,
-  },
-  date: {
-    paddingTop: (statusBarHeight + 15),
     paddingLeft: 20,
+    width: 100
   }, dateText: {
     color: '#FFF',
     fontSize: 16,
-    fontWeight: 700
-  },
-  hourlyForecastContainer: {
+  }, settingsButton: {
+    paddingTop: (statusBarHeight + 10),
+    paddingRight: 20,
+  }, hourlyForecastContainer: {
     paddingHorizontal: 10
   }
 });
 
-// purple ['#512F81', '#800080']
+// Blue: ['#89AFFF', '#000']
+// Purple: ['#800080', '#000']
+// TextColor: '#FFF

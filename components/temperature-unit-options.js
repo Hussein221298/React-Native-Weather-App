@@ -1,29 +1,35 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default TemperatureUnitOptions = ({ selectedTemperatureUnit, handleUnitChange }) => {
+const TemperatureUnitOptions = ({ selectedTemperatureUnit, handleUnitChange }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Temperature Unit:</Text>
 
       <TouchableOpacity
         style={[styles.option, selectedTemperatureUnit.name === 'celsius' && styles.selectedOption]}
-        onPress={() => handleUnitChange({
-          name: 'celsius',
-          symbol: '\u2103'
-        })}
+        onPress={() =>
+          handleUnitChange({
+            name: 'celsius',
+            symbol: '\u2103',
+          })
+        }
       >
-        <Text style={styles.optionText}>°C</Text>
+        <Text style={[styles.optionText, selectedTemperatureUnit.name === 'celsius' && styles.selectedText]}>°C</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={[styles.option, selectedTemperatureUnit.name === 'fahrenheit' && styles.selectedOption]}
-        onPress={() => handleUnitChange({
-          name: 'fahrenheit',
-          symbol: '\u2109'
-        })}
+        onPress={() =>
+          handleUnitChange({
+            name: 'fahrenheit',
+            symbol: '\u2109',
+          })
+        }
       >
-        <Text style={styles.optionText}>°F</Text>
+        <Text style={[styles.optionText, selectedTemperatureUnit.name === 'fahrenheit' && styles.selectedText]}>
+          °F
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -31,35 +37,35 @@ export default TemperatureUnitOptions = ({ selectedTemperatureUnit, handleUnitCh
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row'
+    marginVertical: 10,
   },
   label: {
     fontSize: 16,
-    marginBottom: 10,
-    paddingRight: 10
+    marginRight: 10,
   },
   option: {
-    width: 70,
-    height: 50,
+    width: 60,
+    height: 40,
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 10,
-  },
-  selectedOption: {
-    backgroundColor: 'lightblue',
+    marginHorizontal: 5,
   },
   optionText: {
-    fontSize: 20,
-  },
-  selectedUnit: {
     fontSize: 16,
+    color: 'black',
+  },
+  selectedOption: {
+    backgroundColor: '#2196F3',
+  },
+  selectedText: {
+    color: 'white',
     fontWeight: 'bold',
   },
 });
+
+export default TemperatureUnitOptions;
